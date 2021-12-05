@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CountdownTimer from '../CountdownTimer';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Program, Provider, web3 } from '@project-serum/anchor';
 import { MintLayout, TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
@@ -361,27 +362,44 @@ const CandyMachine = ({ walletAddress }) => {
     </div>
   )
 
+  // Render function
+  const renderDropTimer = () => {
+    // Get current date and dropDate in a JavaScript Date object
+    const currentDate = new Date(); // new Date object default construction is current date
+    const dropDate = new Date(machineStats.goLiveData * 1000); //machineStats property was defined in earlier set function
+
+    // If current date is less than dropDate, render Countdown component
+    if (currentDate < dropDate) {
+      console.log('Before drop date!');
+      return <CountdownTimer dropDate={dropDate} />;
+    } 
+
+    return <p>{`Drop Date: ${machineStats.goLiveDateTimeString}`}</p>;
+  }
+
   return (
     // only show this if machineStats is available
     machineStats && (
     <div className="machine-container">
-      <p>{`Drop Date: ${machineStats.goLiveDateTimeString}`}</p>
+      {/* <p>{`Drop Date: ${machineStats.goLiveDateTimeString}`}</p> */}
+      {renderDropTimer()}
       <p>{`Items Minted: ${machineStats.itemsRedeemed} / ${machineStats.itemsAvailable}`}</p>
-      <button 
-        className="cta-button mint-button" 
-        onClick={mintToken}
-        disabled={isMinting}
-      >
-        Mint NFT
-      </button>
-      {isLoadingMints && <p>LOADING MINTS...</p>}
+        {machineStats.itemsRedeemed === machineStats.itemsAvailable ? (
+          <p className="sub-text">Sold Out! 🙊</p>
+        ) : (
+          <button 
+            className="cta-button mint-button" 
+            onClick={mintToken}
+            disabled={isMinting}
+          >
+            Mint NFT
+          </button>
+        )}
       {mints.length > 0 && renderMintedItems()}
+      {isLoadingMints && <p>LOADING MINTS...</p>}
     </div>
     )
   );
-
-
-
 };
 
 export default CandyMachine;
