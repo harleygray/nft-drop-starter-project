@@ -1,0 +1,19 @@
+{
+    "name": "Turtwig",
+    "symbol": "",
+    "image": "0.png",
+    "properties": {
+      "files": [
+        {
+          "uri": "0.png",
+          "type": "image/png"
+        }
+      ],
+      "creators": [
+        {
+          "address": "4stiBkZEmMqqS4tCKMD43nupaKoyFdTdPu3NNPiN8u7g",
+          "share": 100
+        }
+      ]
+    }
+  }

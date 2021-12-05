@@ -1,0 +1,19 @@
+{
+    "name": "Piplup",
+    "symbol": "",
+    "image": "2.png",
+    "properties": {
+      "files": [
+        {
+          "uri": "2.png",
+          "type": "image/png"
+        }
+      ],
+      "creators": [
+        {
+          "address": "4stiBkZEmMqqS4tCKMD43nupaKoyFdTdPu3NNPiN8u7g",
+          "share": 100
+        }
+      ]
+    }
+  }
